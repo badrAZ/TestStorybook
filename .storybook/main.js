@@ -9,7 +9,8 @@ const config = {
   "addons": [
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
-    "@storybook/addon-interactions"
+    "@chromatic-com/storybook",
+    "@storybook/experimental-addon-test"
   ],
   "framework": {
     "name": "@storybook/react-vite",
