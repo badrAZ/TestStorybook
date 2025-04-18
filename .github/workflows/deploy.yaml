@@ -12,8 +12,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: build-publish
-      uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: 'Install dependencies'
+      run: yarn install --frozen-lockfile 
+    - name: 'Build'
+      run: yarn build-storybook
+    - name: 'upload'
+      uses: actions/upload-pages-artifact@v3
       with:
         path: storybook-static # change to your build folder
-        install_command: yarn install --frozen-lockfile 
+    - name: 'Deploy to GitHub Pages'
+      uses:  actions/deploy-pages@v4
+      with:
+        token: ${{ github.token }}
+
